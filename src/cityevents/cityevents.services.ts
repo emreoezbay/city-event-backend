@@ -13,6 +13,7 @@ export class CityEventService {
       evetTitle,
       eventDate,
       eventCity,
+      [],
     );
     this.cityevents.push(newCityEvent);
     return eventId;
@@ -53,7 +54,9 @@ export class CityEventService {
   }
 
   private findCityEvent(id: string): [CityEvent, number] {
-    const cityeventIndex = this.cityevents.findIndex((prod) => prod.id === id);
+    const cityeventIndex = this.cityevents.findIndex(
+      (cityevent) => cityevent.id === id,
+    );
     const cityevent = this.cityevents[cityeventIndex];
     if (!cityevent) {
       throw new NotFoundException('Could not find cityevent.');

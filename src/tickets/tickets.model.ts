@@ -1,8 +1,9 @@
 export class Ticket {
   constructor(
     public id: string,
-    public title: string,
-    public description: string,
-    public price: number,
+    public cityEventId: string,
+    public firstName: string,
+    public lastName: string,
+    public barcode: string,
   ) {}
 }

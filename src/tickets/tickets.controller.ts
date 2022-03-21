@@ -16,14 +16,16 @@ export class TicketsController {
 
   @Post()
   addTicket(
-    @Body('title') prodTitle: string,
-    @Body('description') prodDesc: string,
-    @Body('price') prodPrice: number,
+    @Body('cityEventId') cityEventId: string,
+    @Body('firstName') firstName: string,
+    @Body('lastName') lastName: string,
+    @Body('barcode') barcode: string,
   ) {
     const generatedId = this.ticketsService.insertTicket(
-      prodTitle,
-      prodDesc,
-      prodPrice,
+      cityEventId,
+      firstName,
+      lastName,
+      barcode,
     );
     return { id: generatedId };
   }
@@ -34,24 +36,31 @@ export class TicketsController {
   }
 
   @Get(':id')
-  getTicket(@Param('id') prodId: string) {
-    return this.ticketsService.getSingleTicket(prodId);
+  getTicket(@Param('id') cityeventId: string) {
+    return this.ticketsService.getSingleTicket(cityeventId);
   }
 
   @Patch(':id')
   updateTicket(
-    @Param('id') prodId: string,
-    @Body('title') prodTitle: string,
-    @Body('description') prodDesc: string,
-    @Body('price') prodPrice: number,
+    @Param('ticketId') ticketId: string,
+    @Body('cityEventId') cityEventId: string,
+    @Body('firstName') firstName: string,
+    @Body('lastName') lastName: string,
+    @Body('barcode') barcode: string,
   ) {
-    this.ticketsService.updateTicket(prodId, prodTitle, prodDesc, prodPrice);
+    this.ticketsService.updateTicket(
+      ticketId,
+      cityEventId,
+      firstName,
+      lastName,
+      barcode,
+    );
     return null;
   }
 
   @Delete(':id')
-  removeTicket(@Param('id') prodId: string) {
-    this.ticketsService.deleteTicket(prodId);
+  removeTicket(@Param('id') ticketId: string) {
+    this.ticketsService.deleteTicket(ticketId);
     return null;
   }
 }

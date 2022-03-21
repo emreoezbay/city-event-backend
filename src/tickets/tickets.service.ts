@@ -6,11 +6,22 @@ import { Ticket } from './tickets.model';
 export class TicketsService {
   private tickets: Ticket[] = [];
 
-  insertTicket(title: string, desc: string, price: number) {
-    const prodId = Math.random().toString();
-    const newTicket = new Ticket(prodId, title, desc, price);
+  insertTicket(
+    cityEventId: string,
+    firstName: string,
+    lastName: string,
+    barcode: string,
+  ) {
+    const ticketId = Math.random().toString();
+    const newTicket = new Ticket(
+      ticketId,
+      cityEventId,
+      firstName,
+      lastName,
+      barcode,
+    );
     this.tickets.push(newTicket);
-    return prodId;
+    return ticketId;
   }
 
   getTickets() {
@@ -22,28 +33,37 @@ export class TicketsService {
     return { ...ticket };
   }
 
-  updateTicket(ticketId: string, title: string, desc: string, price: number) {
+  updateTicket(
+    ticketId: string,
+    cityEventId: string,
+    firstName: string,
+    lastName: string,
+    barcode: string,
+  ) {
     const [ticket, index] = this.findTicket(ticketId);
     const updatedTicket = { ...ticket };
-    if (title) {
-      updatedTicket.title = title;
+    if (cityEventId) {
+      updatedTicket.cityEventId = cityEventId;
     }
-    if (desc) {
-      updatedTicket.description = desc;
+    if (firstName) {
+      updatedTicket.firstName = firstName;
     }
-    if (price) {
-      updatedTicket.price = price;
+    if (lastName) {
+      updatedTicket.lastName = lastName;
+    }
+    if (barcode) {
+      updatedTicket.barcode = barcode;
     }
     this.tickets[index] = updatedTicket;
   }
 
-  deleteTicket(prodId: string) {
-    const index = this.findTicket(prodId)[1];
+  deleteTicket(ticketId: string) {
+    const index = this.findTicket(ticketId)[1];
     this.tickets.splice(index, 1);
   }
 
   private findTicket(id: string): [Ticket, number] {
-    const ticketIndex = this.tickets.findIndex((prod) => prod.id === id);
+    const ticketIndex = this.tickets.findIndex((ticket) => ticket.id === id);
     const ticket = this.tickets[ticketIndex];
     if (!ticket) {
       throw new NotFoundException('Could not find ticket.');
