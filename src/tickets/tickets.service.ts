@@ -4,7 +4,22 @@ import { Ticket } from './tickets.model';
 
 @Injectable()
 export class TicketsService {
-  private tickets: Ticket[] = [];
+  private tickets: Ticket[] = [
+    {
+      id: '1',
+      cityEventId: '1',
+      firstName: 'Emre',
+      lastName: 'Özbay',
+      barcode: '12345678',
+    },
+    {
+      id: '2',
+      cityEventId: '1',
+      firstName: 'Gamze',
+      lastName: 'Özbay',
+      barcode: '12345678',
+    },
+  ];
 
   insertTicket(
     cityEventId: string,
@@ -24,8 +39,12 @@ export class TicketsService {
     return ticketId;
   }
 
-  getTickets() {
-    return [...this.tickets];
+  getTickets(cityEventId?: string | undefined) {
+    if (typeof cityEventId !== 'undefined') {
+      return [...this.tickets.filter((t) => t.cityEventId === cityEventId)];
+    } else {
+      return [...this.tickets];
+    }
   }
 
   getSingleTicket(ticketId: string) {

@@ -4,19 +4,31 @@ import { CityEvent } from './cityevents.model';
 
 @Injectable()
 export class CityEventService {
-  private cityevents: CityEvent[] = [];
+  private cityevents: CityEvent[] = [
+    {
+      id: '1',
+      eventTitle: 'Konzert in London',
+      eventDate: new Date('03.05.2022 15:00'),
+      eventCity: 'London',
+    },
+    {
+      id: '2',
+      eventTitle: 'Opera',
+      eventDate: new Date('05.05.2022 12:00'),
+      eventCity: 'Köln',
+    },
+  ];
 
-  insertCityEvent(evetTitle: string, eventDate: Date, eventCity: string) {
+  insertCityEvent(eventTitle: string, eventDate: Date, eventCity: string) {
     const eventId = Math.random().toString();
     const newCityEvent = new CityEvent(
       eventId,
-      evetTitle,
+      eventTitle,
       eventDate,
       eventCity,
-      [],
     );
     this.cityevents.push(newCityEvent);
-    return eventId;
+    return newCityEvent;
   }
 
   getCityEvents() {
@@ -30,14 +42,14 @@ export class CityEventService {
 
   updateCityEvent(
     cityeventId: string,
-    evetTitle: string,
+    eventTitle: string,
     eventDate: Date,
     eventCity: string,
   ) {
     const [cityevent, index] = this.findCityEvent(cityeventId);
     const updatedCityEvent = { ...cityevent };
-    if (evetTitle) {
-      updatedCityEvent.evetTitle = evetTitle;
+    if (eventTitle) {
+      updatedCityEvent.eventTitle = eventTitle;
     }
     if (eventDate) {
       updatedCityEvent.eventDate = eventDate;

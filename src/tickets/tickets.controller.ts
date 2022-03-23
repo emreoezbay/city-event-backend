@@ -35,9 +35,9 @@ export class TicketsController {
     return this.ticketsService.getTickets();
   }
 
-  @Get(':id')
-  getTicket(@Param('id') cityeventId: string) {
-    return this.ticketsService.getSingleTicket(cityeventId);
+  @Get(':eventId')
+  getEventTickets(@Param('eventId') eventId: string) {
+    return this.ticketsService.getTickets(eventId);
   }
 
   @Patch(':id')

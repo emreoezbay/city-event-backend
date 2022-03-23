@@ -20,12 +20,12 @@ export class CityEventsController {
     @Body('eventDate') eventDate: Date,
     @Body('eventCity') eventCity: string,
   ) {
-    const generatedId = this.cityeventsService.insertCityEvent(
+    const newCityEvent = this.cityeventsService.insertCityEvent(
       eventTitle,
       eventDate,
       eventCity,
     );
-    return { id: generatedId };
+    return { newCityEvent };
   }
 
   @Get()
