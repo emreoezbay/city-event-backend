@@ -19,15 +19,13 @@ export class TicketsController {
     @Body('cityEventId') cityEventId: string,
     @Body('firstName') firstName: string,
     @Body('lastName') lastName: string,
-    @Body('barcode') barcode: string,
   ) {
-    const generatedId = this.ticketsService.insertTicket(
+    const newTicket = this.ticketsService.insertTicket(
       cityEventId,
       firstName,
       lastName,
-      barcode,
     );
-    return { id: generatedId };
+    return { ...newTicket };
   }
 
   @Get()
@@ -61,6 +59,6 @@ export class TicketsController {
   @Delete(':id')
   removeTicket(@Param('id') ticketId: string) {
     this.ticketsService.deleteTicket(ticketId);
-    return null;
+    //return null;
   }
 }

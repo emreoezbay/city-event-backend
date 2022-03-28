@@ -21,13 +21,10 @@ export class TicketsService {
     },
   ];
 
-  insertTicket(
-    cityEventId: string,
-    firstName: string,
-    lastName: string,
-    barcode: string,
-  ) {
-    const ticketId = Math.random().toString();
+  insertTicket(cityEventId: string, firstName: string, lastName: string) {
+    const ticketId = Math.round(Math.random() * 100000000).toString();
+    // TODO: barcode must be unique
+    const barcode = Math.random().toString(36).slice(2);
     const newTicket = new Ticket(
       ticketId,
       cityEventId,
@@ -36,7 +33,7 @@ export class TicketsService {
       barcode,
     );
     this.tickets.push(newTicket);
-    return ticketId;
+    return newTicket;
   }
 
   getTickets(cityEventId?: string | undefined) {

@@ -1,5 +1,3 @@
-import { Ticket } from 'src/tickets/tickets.model';
-
 export class CityEvent {
   constructor(
     public id: string,

@@ -25,7 +25,7 @@ export class CityEventsController {
       eventDate,
       eventCity,
     );
-    return { newCityEvent };
+    return newCityEvent;
   }
 
   @Get()

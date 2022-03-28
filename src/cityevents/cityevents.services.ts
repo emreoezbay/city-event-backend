@@ -20,7 +20,7 @@ export class CityEventService {
   ];
 
   insertCityEvent(eventTitle: string, eventDate: Date, eventCity: string) {
-    const eventId = Math.random().toString();
+    const eventId = Math.round(Math.random() * 100000000).toString();
     const newCityEvent = new CityEvent(
       eventId,
       eventTitle,
@@ -37,7 +37,7 @@ export class CityEventService {
 
   getSingleCityEvent(cityeventId: string) {
     const cityevent = this.findCityEvent(cityeventId)[0];
-    return { ...cityevent };
+    return cityevent;
   }
 
   updateCityEvent(
